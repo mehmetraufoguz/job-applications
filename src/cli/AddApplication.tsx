@@ -1,13 +1,13 @@
-
-import React from 'react';
-import { Text, useInput } from 'ink';
+import { useInput } from 'ink';
 import { Form, FormStructure } from 'ink-form';
 import { orm } from '../db/index.js';
 import { jobApplications } from '../db/jobApplications.schema.js';
 
-const PLATFORM_OPTIONS = [
+export const PLATFORM_OPTIONS = [
     { label: 'LinkedIn', value: 'linkedin' },
     { label: 'Indeed', value: 'indeed' },
+    { label: 'Wellfound', value: 'wellfound' },
+    { label: 'Greenhouse', value: 'greenhouse' },
     { label: 'Company Website', value: 'company_website' },
     { label: 'Other', value: 'other' }
 ];

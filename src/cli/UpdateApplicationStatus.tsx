@@ -1,11 +1,12 @@
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Text, Box, useInput } from 'ink';
 import { Form } from 'ink-form';
-import { QuickSearchInput } from './QuickSearchInput.js';
+import { sql } from 'drizzle-orm';
+
 import { orm } from '../db/index.js';
 import { jobApplications } from '../db/jobApplications.schema.js';
-import { sql } from 'drizzle-orm';
+import { QuickSearchInput } from './QuickSearchInput.js';
 import { STATUS_OPTIONS as BASE_STATUS_OPTIONS } from './AddApplication.js';
 
 // Append Delete option to status dropdown

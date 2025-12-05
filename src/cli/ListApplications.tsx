@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Text, Box, useInput } from 'ink';
-// Removed ink-table
+import { desc } from 'drizzle-orm';
+import Link from 'ink-link';
+
 import { orm } from '../db/index.js';
 import { jobApplications } from '../db/jobApplications.schema.js';
-import { desc } from 'drizzle-orm';
+import { PLATFORM_OPTIONS } from './AddApplication.js';
 
 export const ListApplications = ({ onDone }: { onDone: () => void }) => {
     const [apps, setApps] = useState<any[]>([]);
@@ -50,17 +52,21 @@ export const ListApplications = ({ onDone }: { onDone: () => void }) => {
     const COL_COMPANY = 32;
     const COL_PLATFORM = 24;
     const COL_STATUS = 16;
+    const COL_LINK = 28;
 
     function capitalize(str: string) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    // Platform color mapping
-    const platformColors: Record<string, string> = {
+    // Type-safe platform color mapping
+    type PlatformKey = typeof PLATFORM_OPTIONS[number]['value'];
+    const platformColors: Record<PlatformKey, string> = {
         linkedin: 'blue',
         indeed: 'magenta',
-        company_website: 'green',
-        other: 'yellow'
+        wellfound: 'cyan',
+        greenhouse: 'green',
+        company_website: 'gray',
+        other: 'yellow',
     };
 
     // Status color mapping (background and text)
@@ -82,12 +88,14 @@ export const ListApplications = ({ onDone }: { onDone: () => void }) => {
                 <Box width={COL_COMPANY}><Text bold>Company Name</Text></Box>
                 <Box width={COL_PLATFORM}><Text bold>Platform</Text></Box>
                 <Box width={COL_STATUS}><Text bold>Status</Text></Box>
+                <Box width={COL_LINK}><Text bold>Link</Text></Box>
             </Box>
             <Box flexDirection="row">
                 <Box width={COL_ID}><Text>{'-'.repeat(COL_ID)}</Text></Box>
                 <Box width={COL_COMPANY}><Text>{'-'.repeat(COL_COMPANY)}</Text></Box>
                 <Box width={COL_PLATFORM}><Text>{'-'.repeat(COL_PLATFORM)}</Text></Box>
                 <Box width={COL_STATUS}><Text>{'-'.repeat(COL_STATUS)}</Text></Box>
+                <Box width={COL_LINK}><Text>{'-'.repeat(COL_LINK)}</Text></Box>
             </Box>
             {pageApps.map((app, idx) => {
                 const platformColor = platformColors[app.platform] || 'white';
@@ -99,10 +107,11 @@ export const ListApplications = ({ onDone }: { onDone: () => void }) => {
                             <Box width={COL_COMPANY}><Text>{app.companyName}</Text></Box>
                             <Box width={COL_PLATFORM}><Text color={platformColor}>{capitalize(app.platform)}</Text></Box>
                             <Box width={COL_STATUS}><Text color={statusColor.fg} backgroundColor={statusColor.bg}>{capitalize(app.status)}</Text></Box>
+                            <Box width={COL_LINK}><Link url={app.link}>visit -&gt;</Link></Box>
                         </Box>
                         {idx < pageApps.length - 1 && (
                             <Box>
-                                <Text color="gray">{'─'.repeat(COL_ID + COL_COMPANY + COL_PLATFORM + COL_STATUS)}</Text>
+                                <Text color="gray">{'─'.repeat(COL_ID + COL_COMPANY + COL_PLATFORM + COL_STATUS + COL_LINK)}</Text>
                             </Box>
                         )}
                     </React.Fragment>
