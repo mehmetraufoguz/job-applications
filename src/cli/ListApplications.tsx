@@ -3,6 +3,7 @@ import { Text, Box, useInput } from 'ink';
 // Removed ink-table
 import { orm } from '../db/index.js';
 import { jobApplications } from '../db/jobApplications.schema.js';
+import { desc } from 'drizzle-orm';
 
 export const ListApplications = ({ onDone }: { onDone: () => void }) => {
     const [apps, setApps] = useState<any[]>([]);
@@ -13,7 +14,10 @@ export const ListApplications = ({ onDone }: { onDone: () => void }) => {
 
     useEffect(() => {
         (async () => {
-            const result = await orm.select().from(jobApplications);
+            const result = await orm
+                .select()
+                .from(jobApplications)
+                .orderBy(desc(jobApplications.updatedAt));
             setApps(result);
             setLoading(false);
         })();
