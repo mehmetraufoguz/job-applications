@@ -1,0 +1,32 @@
+{
+  "name": "job-applications",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/cli/index.js",
+    "drizzle:generate": "drizzle-kit generate --config=drizzle.config.ts",
+    "drizzle:migrate": "drizzle-kit migrate --config=drizzle.config.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "drizzle-kit": "^0.31.8",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.3.14",
+    "drizzle-orm": "^0.45.0",
+    "ink": "^6.5.1",
+    "ink-form": "^2.0.1",
+    "ink-quicksearch-input": "^1.0.0",
+    "ink-select-input": "^6.2.0",
+    "ink-text-input": "^6.0.0",
+    "react": "^19.2.1"
+  }
+}

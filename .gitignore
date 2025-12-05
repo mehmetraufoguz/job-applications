@@ -1,0 +1,25 @@
+# Node.js
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# VS Code
+.vscode/
+
+# Embedded Postgres (pglite)
+pglite/*
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+~$*
+
+# Misc
+*.log
+
+# Ignore local config
+local.settings.json
