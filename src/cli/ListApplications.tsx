@@ -52,7 +52,7 @@ export const ListApplications = ({ onDone }: { onDone: () => void }) => {
     const COL_COMPANY = 32;
     const COL_PLATFORM = 24;
     const COL_STATUS = 16;
-    const COL_LINK = 28;
+    const COL_LINK = 100;
 
     function capitalize(str: string) {
         return str.charAt(0).toUpperCase() + str.slice(1);
